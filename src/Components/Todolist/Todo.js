@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./todo.css";
+import "./todo.css"
 import {
   addTodo,
-  deleteTodo,
-  toggleCompletion,
   selectTodoCount,
   selectTodos,
 } from "../../features/todoSlice";
+import SingleTodo from "./SingleTodo";
 // {todo: '', id: num, isComplete: bool}
 //}
 
@@ -19,38 +18,37 @@ const Todo = () => {
   // useSelector accepts a method (selector Method), returns back the data.
   const todosCount = useSelector(selectTodoCount);
   const todos = useSelector(selectTodos);
-  const obj = {
-    todo: todo,
-    id: todosCount + 1,
-    isComplete: false,
-  };
 
   const handleClick = () => {
+    const obj = {
+      todo: todo,
+      id: todosCount + 1,
+      isComplete: false,
+    };
     dispatch(addTodo(obj));
+    setTodo('')
   };
   const handleChange = (e) => {
     setTodo(e.target.value);
   };
-  const handleDel = (id) => {
-    dispatch(deleteTodo(id));
-  };
+
   return (
     <div className="container">
-      <input
+      <div className="box flex">
+      <input className="center-text"
         onChange={(e) => handleChange(e)}
         value={todo}
         type="text"
         placeholder="What do you have to do today?"
       />
-      <button type="button" onClick={() => handleClick()}>
+      <button className="add" type="button" onClick={() => handleClick()}>
         Add Todo
       </button>
-      <div className="display-todos">
+      </div>
+
+      <div className="display-todos flex">
         {todos.map((t, index) => (
-          <li key={index}>
-            {t.todo}
-            <button onClick={() =>handleDel(t.id)}>Delete</button>
-          </li>
+          <SingleTodo t={t}  />
         ))}
       </div>
     </div>

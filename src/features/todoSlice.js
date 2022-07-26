@@ -8,16 +8,21 @@ const todoSlice = createSlice({
   },
   reducers: {
     addTodo: (state, action) => {
-      state.todos = [...state.todos, action.payload];
+      state.todosCount++;
+      state.todos.push(action.payload);
     },
-    deleteTodo: (state, action) => { 
-      state.todos.filter((todo) => todo.id !== action.payload);
-      console.log();
+    deleteTodo: (state, action) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+      state.todosCount--;
     },
-    toggleCompletion: (state) => {},
+    completeOrNot: (state, action) => {
+      //action.payload as the id
+      let todo = state.todos.filter((todo) => todo.id === action.payload)[0];
+      todo.isComplete = !todo.isComplete;
+    },
   },
 });
-
+// when using slices you can use methords that mutate the codfe because of Immer
 export const selectTodos = (state) => {
   return state.todo.todos;
 };
@@ -25,6 +30,6 @@ export const selectTodos = (state) => {
 export const selectTodoCount = (state) => {
   return state.todo.todosCount;
 };
-export const { addTodo, deleteTodo, toggleCompletion } = todoSlice.actions;
+export const { addTodo, deleteTodo, completeOrNot } = todoSlice.actions;
 
 export default todoSlice.reducer;
