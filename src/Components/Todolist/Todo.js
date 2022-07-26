@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./todo.css"
+import "./todo.css";
 import {
   addTodo,
   selectTodoCount,
@@ -26,7 +26,7 @@ const Todo = () => {
       isComplete: false,
     };
     dispatch(addTodo(obj));
-    setTodo('')
+    setTodo("");
   };
   const handleChange = (e) => {
     setTodo(e.target.value);
@@ -35,20 +35,21 @@ const Todo = () => {
   return (
     <div className="container">
       <div className="box flex">
-      <input className="center-text"
-        onChange={(e) => handleChange(e)}
-        value={todo}
-        type="text"
-        placeholder="What do you have to do today?"
-      />
-      <button className="add" type="button" onClick={() => handleClick()}>
-        Add Todo
-      </button>
+        <input
+          className="center-text"
+          onChange={(e) => handleChange(e)}
+          value={todo}
+          type="text"
+          placeholder="What do you have to do today?"
+        />
+        <button className="add" type="button" onClick={() => handleClick()}>
+          Add Todo
+        </button>
       </div>
 
       <div className="display-todos flex">
         {todos.map((t, index) => (
-          <SingleTodo t={t}  />
+          <SingleTodo t={t} />
         ))}
       </div>
     </div>

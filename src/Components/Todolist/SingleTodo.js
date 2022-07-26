@@ -7,34 +7,52 @@ const SingleTodo = ({ t }) => {
   const [isComplete, setIsComplete] = useState(t.isComplete);
   const dispatch = useDispatch();
 
-
-  
-
   const toggleCompletion = (id) => {
     setIsComplete(!isComplete);
-    dispatch(completeOrNot(id))
-    const box = 
-    <input type="checkbox" style={{ textDecoration: "strikeThrough" }} />
-
-    isComplete ? {box} :<input type="checkbox" style={{ textDecoration: "strikeThrough" }} />;
+    dispatch(completeOrNot(id));
   };
   const handleDel = (id) => {
     dispatch(deleteTodo(id));
   };
+  const task = (
+    <li className="todos flex justify-space-b complete">
+      {t.todo}
+      <button className="delete" onClick={() => handleDel(t.id)}>
+        <img
+          src="https://img.icons8.com/external-tulpahn-detailed-outline-tulpahn/64/000000/external-bin-mobile-user-interface-tulpahn-detailed-outline-tulpahn.png"
+          alt="Delete"
+          className="del-img"
+        />
+      </button>{" "}
+      <input
+        type="checkbox"
+        defaultChecked={isComplete}
+        onChange={() => toggleCompletion(t.id)}
+      />
+    </li>
+  );
 
   return (
     <>
-      <li className="todos flex justify-space-b">
-        {t.todo}
-        <button className="delete" onClick={() => handleDel(t.id)}>
-          Delete
-        </button>{" "}
-        <input
-          type="checkbox"
-          defaultChecked={isComplete}
-          onChange={() => toggleCompletion(t.id)}
+      {isComplete ? (
+        task
+      ) : (
+        <li className="todos flex justify-space-b">
+          {t.todo}
+          <button className="delete" onClick={() => handleDel(t.id)}>
+          <img
+          src="https://img.icons8.com/external-tulpahn-detailed-outline-tulpahn/64/000000/external-bin-mobile-user-interface-tulpahn-detailed-outline-tulpahn.png"
+          alt="Delete"
+          className="del-img"
         />
-      </li>
+          </button>{" "}
+          <input
+            type="checkbox"
+            defaultChecked={isComplete}
+            onChange={() => toggleCompletion(t.id)}
+          />
+        </li>
+      )}
     </>
   );
 };

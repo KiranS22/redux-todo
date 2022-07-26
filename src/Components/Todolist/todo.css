@@ -35,12 +35,25 @@ margin-top:20px;
   border-radius: 5px;
   margin-left: 5px;
   margin-top: 20px;
+  background-color: #000;
+  color: #fff;
 }
 .display-todos{
   width: 80%;
   margin: 20px 30px;
   flex-direction: column;
   
+}
+
+.del-img{
+ height: 30px;
+ width: 30px; 
+ filter: invert(24%) sepia(61%) saturate(6137%) hue-rotate(352deg) brightness(89%) contrast(129%);
+}
+
+.delete{
+  background: transparent;
+  border: none;
 }
 
 input[type="checkbox"]{
@@ -56,6 +69,12 @@ input[type="checkbox"]{
   color: #fff;
   background-color: #000;
   margin:10px;
-  
-
 }
+
+.complete {
+  text-decoration-color: #ff0000;
+  text-decoration-line: line-through;
+  text-decoration-thickness: 0.2rem;
+  
+}
+
